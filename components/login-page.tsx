@@ -67,7 +67,6 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
               Ingresar
             </Button>
           </form>
-          <p className="text-xs text-muted-foreground text-center mt-4">Demo: Ingrese cualquier usuario y contraseña</p>
         </CardContent>
       </Card>
     </div>
