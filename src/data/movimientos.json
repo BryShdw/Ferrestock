@@ -1,0 +1,102 @@
+[
+    {
+        "id": 1,
+        "fechaHora": "01/12/2025 08:30 AM",
+        "productoSku": "FER-001",
+        "productoNombre": "Martillo de Acero 16oz",
+        "tipo": "Entrada",
+        "cantidad": 50,
+        "usuario": "admin",
+        "referencia": "Guía G-001"
+    },
+    {
+        "id": 2,
+        "fechaHora": "01/12/2025 09:15 AM",
+        "productoSku": "FER-003",
+        "productoNombre": "Tubo PVC SAP 2\"",
+        "tipo": "Salida",
+        "cantidad": -20,
+        "usuario": "vendedor1",
+        "referencia": "Boleta B-123"
+    },
+    {
+        "id": 3,
+        "fechaHora": "01/12/2025 10:45 AM",
+        "productoSku": "FER-006",
+        "productoNombre": "Cable Eléctrico TW #14 Rojo",
+        "tipo": "Entrada",
+        "cantidad": 200,
+        "usuario": "admin",
+        "referencia": "Factura F-902"
+    },
+    {
+        "id": 4,
+        "fechaHora": "01/12/2025 11:20 AM",
+        "productoSku": "FER-002",
+        "productoNombre": "Destornillador Phillips #2",
+        "tipo": "Salida",
+        "cantidad": -5,
+        "usuario": "vendedor2",
+        "referencia": "Boleta B-124"
+    },
+    {
+        "id": 5,
+        "fechaHora": "01/12/2025 02:00 PM",
+        "productoSku": "FER-007",
+        "productoNombre": "Taladro Percutor 650W",
+        "tipo": "Ajuste",
+        "cantidad": -1,
+        "usuario": "admin",
+        "referencia": "Merma"
+    },
+    {
+        "id": 6,
+        "fechaHora": "02/12/2025 09:00 AM",
+        "productoSku": "FER-005",
+        "productoNombre": "Pintura Látex Blanca 1gal",
+        "tipo": "Entrada",
+        "cantidad": 40,
+        "usuario": "admin",
+        "referencia": "Guía G-002"
+    },
+    {
+        "id": 7,
+        "fechaHora": "02/12/2025 10:30 AM",
+        "productoSku": "FER-004",
+        "productoNombre": "Cemento Portland 42.5kg",
+        "tipo": "Salida",
+        "cantidad": -15,
+        "usuario": "vendedor1",
+        "referencia": "Factura F-903"
+    },
+    {
+        "id": 8,
+        "fechaHora": "02/12/2025 11:45 AM",
+        "productoSku": "FER-001",
+        "productoNombre": "Martillo de Acero 16oz",
+        "tipo": "Salida",
+        "cantidad": -2,
+        "usuario": "vendedor2",
+        "referencia": "Boleta B-125"
+    },
+    {
+        "id": 9,
+        "fechaHora": "02/12/2025 03:15 PM",
+        "productoSku": "FER-008",
+        "productoNombre": "Disco de Corte Metal 4.5\"",
+        "tipo": "Entrada",
+        "cantidad": 100,
+        "usuario": "admin",
+        "referencia": "Guía G-003"
+    },
+    {
+        "id": 10,
+        "fechaHora": "02/12/2025 04:50 PM",
+        "productoSku": "FER-003",
+        "productoNombre": "Tubo PVC SAP 2\"",
+        "tipo": "Ajuste",
+        "cantidad": 2,
+        "usuario": "admin",
+        "referencia": "Corrección Inventario"
+    }
+]

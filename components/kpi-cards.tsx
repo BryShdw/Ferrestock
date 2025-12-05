@@ -2,12 +2,26 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Package, DollarSign, AlertCircle } from "lucide-react"
+import { useInventory } from "@/src/context/InventoryContext"
 
 export default function KPICards() {
+  const { products } = useInventory()
+
+  // 1. Productos Totales
+  const totalProducts = products.length
+
+  // 2. Valor del Inventario (Stock * Precio)
+  const inventoryValue = products.reduce((acc, product) => {
+    return acc + (product.stockActual * product.precio)
+  }, 0)
+
+  // 3. Alertas de Stock (Stock <= Mínimo)
+  const lowStockCount = products.filter(p => p.stockActual <= p.stockMinimo).length
+
   const kpiData = [
     {
       title: "Productos Totales",
-      value: "1,500",
+      value: totalProducts.toLocaleString(),
       icon: Package,
       color: "bg-blue-50",
       iconColor: "text-blue-600",
@@ -15,7 +29,7 @@ export default function KPICards() {
     },
     {
       title: "Valor del Inventario",
-      value: "S/ 120,000",
+      value: `S/ ${inventoryValue.toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
       icon: DollarSign,
       color: "bg-green-50",
       iconColor: "text-green-600",
@@ -23,7 +37,7 @@ export default function KPICards() {
     },
     {
       title: "Alertas de Stock",
-      value: "12",
+      value: lowStockCount.toLocaleString(),
       icon: AlertCircle,
       color: "bg-red-50",
       iconColor: "text-red-600",

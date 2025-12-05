@@ -1,0 +1,272 @@
+[
+    {
+        "id": 1,
+        "sku": "FER-001",
+        "nombre": "Martillo de Acero 16oz",
+        "categoria": "Herramientas",
+        "stockActual": 150,
+        "stockMinimo": 50,
+        "precio": 25.00
+    },
+    {
+        "id": 2,
+        "sku": "FER-002",
+        "nombre": "Destornillador Phillips #2",
+        "categoria": "Herramientas",
+        "stockActual": 45,
+        "stockMinimo": 100,
+        "precio": 12.50
+    },
+    {
+        "id": 3,
+        "sku": "FER-003",
+        "nombre": "Tubo PVC SAP 2\"",
+        "categoria": "Tuberías",
+        "stockActual": 320,
+        "stockMinimo": 100,
+        "precio": 18.00
+    },
+    {
+        "id": 4,
+        "sku": "FER-004",
+        "nombre": "Cemento Portland 42.5kg",
+        "categoria": "Materiales",
+        "stockActual": 85,
+        "stockMinimo": 200,
+        "precio": 28.00
+    },
+    {
+        "id": 5,
+        "sku": "FER-005",
+        "nombre": "Pintura Látex Blanca 1gal",
+        "categoria": "Pinturas",
+        "stockActual": 200,
+        "stockMinimo": 50,
+        "precio": 45.00
+    },
+    {
+        "id": 6,
+        "sku": "FER-006",
+        "nombre": "Cable Eléctrico TW #14 Rojo",
+        "categoria": "Eléctricos",
+        "stockActual": 800,
+        "stockMinimo": 100,
+        "precio": 1.50
+    },
+    {
+        "id": 7,
+        "sku": "FER-007",
+        "nombre": "Taladro Percutor 650W",
+        "categoria": "Herramientas Eléctricas",
+        "stockActual": 12,
+        "stockMinimo": 20,
+        "precio": 180.00
+    },
+    {
+        "id": 8,
+        "sku": "FER-008",
+        "nombre": "Disco de Corte Metal 4.5\"",
+        "categoria": "Abrasivos",
+        "stockActual": 500,
+        "stockMinimo": 150,
+        "precio": 3.50
+    },
+    {
+        "id": 9,
+        "sku": "FER-009",
+        "nombre": "Llave Inglesa 10\"",
+        "categoria": "Herramientas",
+        "stockActual": 60,
+        "stockMinimo": 30,
+        "precio": 35.00
+    },
+    {
+        "id": 10,
+        "sku": "FER-010",
+        "nombre": "Cinta Métrica 5m",
+        "categoria": "Medición",
+        "stockActual": 120,
+        "stockMinimo": 50,
+        "precio": 15.00
+    },
+    {
+        "id": 11,
+        "sku": "FER-011",
+        "nombre": "Brocha Cerda Natural 2\"",
+        "categoria": "Pinturas",
+        "stockActual": 300,
+        "stockMinimo": 100,
+        "precio": 8.50
+    },
+    {
+        "id": 12,
+        "sku": "FER-012",
+        "nombre": "Thinner Acrílico 1L",
+        "categoria": "Pinturas",
+        "stockActual": 90,
+        "stockMinimo": 50,
+        "precio": 12.00
+    },
+    {
+        "id": 13,
+        "sku": "FER-013",
+        "nombre": "Juego de Llaves Allen mm",
+        "categoria": "Herramientas",
+        "stockActual": 75,
+        "stockMinimo": 40,
+        "precio": 22.00
+    },
+    {
+        "id": 14,
+        "sku": "FER-014",
+        "nombre": "Interruptor Simple",
+        "categoria": "Eléctricos",
+        "stockActual": 250,
+        "stockMinimo": 80,
+        "precio": 6.50
+    },
+    {
+        "id": 15,
+        "sku": "FER-015",
+        "nombre": "Tomacorriente Doble Universal",
+        "categoria": "Eléctricos",
+        "stockActual": 230,
+        "stockMinimo": 80,
+        "precio": 9.00
+    },
+    {
+        "id": 16,
+        "sku": "FER-016",
+        "nombre": "Foco LED 9W Luz Blanca",
+        "categoria": "Iluminación",
+        "stockActual": 450,
+        "stockMinimo": 200,
+        "precio": 5.00
+    },
+    {
+        "id": 17,
+        "sku": "FER-017",
+        "nombre": "Cinta Aislante Negra 20m",
+        "categoria": "Eléctricos",
+        "stockActual": 600,
+        "stockMinimo": 200,
+        "precio": 3.00
+    },
+    {
+        "id": 18,
+        "sku": "FER-018",
+        "nombre": "Pegamento PVC 1/4 Gal",
+        "categoria": "Gasfitería",
+        "stockActual": 110,
+        "stockMinimo": 60,
+        "precio": 18.00
+    },
+    {
+        "id": 19,
+        "sku": "FER-019",
+        "nombre": "Cinta Teflón 1/2\"",
+        "categoria": "Gasfitería",
+        "stockActual": 800,
+        "stockMinimo": 300,
+        "precio": 1.50
+    },
+    {
+        "id": 20,
+        "sku": "FER-020",
+        "nombre": "Grifo de Cocina Cromado",
+        "categoria": "Gasfitería",
+        "stockActual": 25,
+        "stockMinimo": 30,
+        "precio": 65.00
+    },
+    {
+        "id": 21,
+        "sku": "FER-021",
+        "nombre": "Candado de Bronce 40mm",
+        "categoria": "Seguridad",
+        "stockActual": 140,
+        "stockMinimo": 50,
+        "precio": 28.00
+    },
+    {
+        "id": 22,
+        "sku": "FER-022",
+        "nombre": "Guantes de Cuero Reforzado",
+        "categoria": "Seguridad",
+        "stockActual": 90,
+        "stockMinimo": 100,
+        "precio": 15.00
+    },
+    {
+        "id": 23,
+        "sku": "FER-023",
+        "nombre": "Casco de Seguridad Amarillo",
+        "categoria": "Seguridad",
+        "stockActual": 40,
+        "stockMinimo": 60,
+        "precio": 22.00
+    },
+    {
+        "id": 24,
+        "sku": "FER-024",
+        "nombre": "Silicona Transparente 280ml",
+        "categoria": "Adhesivos",
+        "stockActual": 180,
+        "stockMinimo": 80,
+        "precio": 14.00
+    },
+    {
+        "id": 25,
+        "sku": "FER-025",
+        "nombre": "Serrucho de Carpintero 18\"",
+        "categoria": "Herramientas",
+        "stockActual": 35,
+        "stockMinimo": 20,
+        "precio": 32.00
+    },
+    {
+        "id": 26,
+        "sku": "FER-026",
+        "nombre": "Lija de Agua #100",
+        "categoria": "Abrasivos",
+        "stockActual": 900,
+        "stockMinimo": 300,
+        "precio": 1.20
+    },
+    {
+        "id": 27,
+        "sku": "FER-027",
+        "nombre": "Nivel de Aluminio 12\"",
+        "categoria": "Medición",
+        "stockActual": 45,
+        "stockMinimo": 25,
+        "precio": 18.00
+    },
+    {
+        "id": 28,
+        "sku": "FER-028",
+        "nombre": "Clavo para Madera 2\" (Kg)",
+        "categoria": "Herrajes",
+        "stockActual": 250,
+        "stockMinimo": 100,
+        "precio": 6.00
+    },
+    {
+        "id": 29,
+        "sku": "FER-029",
+        "nombre": "Escalera Tijera Aluminio 6 pasos",
+        "categoria": "Construcción",
+        "stockActual": 8,
+        "stockMinimo": 15,
+        "precio": 150.00
+    },
+    {
+        "id": 30,
+        "sku": "FER-030",
+        "nombre": "Tornillo Autorroscante 1/2\" (Ciento)",
+        "categoria": "Herrajes",
+        "stockActual": 400,
+        "stockMinimo": 150,
+        "precio": 5.00
+    }
+]
