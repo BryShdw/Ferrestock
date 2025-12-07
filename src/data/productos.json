@@ -268,5 +268,14 @@
         "stockActual": 400,
         "stockMinimo": 150,
         "precio": 5
+    },
+    {
+        "sku": "FER-0031",
+        "nombre": "Alicate de corte",
+        "categoria": "Herramientas Eléctricas",
+        "stockActual": 30,
+        "stockMinimo": 5,
+        "precio": 15,
+        "id": 31
     }
 ]
