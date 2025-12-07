@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Plus, Search, Edit, Trash2 } from "lucide-react"
-import initialProducts from "@/src/data/productos.json"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
@@ -25,13 +24,26 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
+interface Product {
+  id: number
+  sku: string
+  nombre: string
+  categoria: string
+  stockActual: number
+  stockMinimo: number
+  precio: number
+}
+
 export default function ProductsSection() {
-  const [products, setProducts] = useState(initialProducts)
+  const [products, setProducts] = useState<Product[]>([])
   const [searchTerm, setSearchTerm] = useState("")
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
+  const [currentId, setCurrentId] = useState<number | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   // Form state
-  const [newProduct, setNewProduct] = useState({
+  const [formData, setFormData] = useState({
     sku: "",
     nombre: "",
     categoria: "",
@@ -39,6 +51,23 @@ export default function ProductsSection() {
     stockMinimo: "",
     precio: ""
   })
+
+  // Fetch products on mount
+  useEffect(() => {
+    fetchProducts()
+  }, [])
+
+  const fetchProducts = async () => {
+    try {
+      const res = await fetch('/api/products')
+      if (res.ok) {
+        const data = await res.json()
+        setProducts(data)
+      }
+    } catch (error) {
+      console.error("Error fetching products:", error)
+    }
+  }
 
   const filteredProducts = products.filter(
     (product) =>
@@ -48,32 +77,16 @@ export default function ProductsSection() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setNewProduct((prev) => ({ ...prev, [name]: value }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleSelectChange = (value: string) => {
-    setNewProduct((prev) => ({ ...prev, categoria: value }))
+    setFormData((prev) => ({ ...prev, categoria: value }))
   }
 
-  const handleSaveProduct = () => {
-    // Validation (basic)
-    if (!newProduct.sku || !newProduct.nombre || !newProduct.categoria) {
-      return
-    }
-
-    const productToAdd = {
-      id: products.length + 1, // Simple ID generation
-      sku: newProduct.sku,
-      nombre: newProduct.nombre,
-      categoria: newProduct.categoria,
-      stockActual: Number(newProduct.stockActual) || 0,
-      stockMinimo: Number(newProduct.stockMinimo) || 0,
-      precio: Number(newProduct.precio) || 0
-    }
-
-    setProducts([...products, productToAdd])
-    setIsAddModalOpen(false)
-    setNewProduct({
+  const openAddModal = () => {
+    setIsEditing(false)
+    setFormData({
       sku: "",
       nombre: "",
       categoria: "",
@@ -81,10 +94,84 @@ export default function ProductsSection() {
       stockMinimo: "",
       precio: ""
     })
+    setIsModalOpen(true)
   }
 
-  const handleDeleteProduct = (id: number) => {
-    setProducts(products.filter(p => p.id !== id))
+  const openEditModal = (product: Product) => {
+    setIsEditing(true)
+    setCurrentId(product.id)
+    setFormData({
+      sku: product.sku,
+      nombre: product.nombre,
+      categoria: product.categoria,
+      stockActual: product.stockActual.toString(),
+      stockMinimo: product.stockMinimo.toString(),
+      precio: product.precio.toString()
+    })
+    setIsModalOpen(true)
+  }
+
+  const handleSaveProduct = async () => {
+    // Validation (basic)
+    if (!formData.sku || !formData.nombre || !formData.categoria) {
+      return
+    }
+
+    setIsLoading(true)
+
+    try {
+      const productData = {
+        sku: formData.sku,
+        nombre: formData.nombre,
+        categoria: formData.categoria,
+        stockActual: Number(formData.stockActual) || 0,
+        stockMinimo: Number(formData.stockMinimo) || 0,
+        precio: Number(formData.precio) || 0
+      }
+
+      if (isEditing && currentId !== null) {
+        // Update existing product
+        const res = await fetch(`/api/products/${currentId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(productData)
+        })
+        if (res.ok) {
+          await fetchProducts()
+        }
+      } else {
+        // Create new product
+        const res = await fetch('/api/products', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(productData)
+        })
+        if (res.ok) {
+          await fetchProducts()
+        }
+      }
+
+      setIsModalOpen(false)
+    } catch (error) {
+      console.error("Error saving product:", error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleDeleteProduct = async (id: number) => {
+    if (!confirm("¿Estás seguro de que deseas eliminar este producto?")) return
+
+    try {
+      const res = await fetch(`/api/products/${id}`, {
+        method: 'DELETE'
+      })
+      if (res.ok) {
+        await fetchProducts()
+      }
+    } catch (error) {
+      console.error("Error deleting product:", error)
+    }
   }
 
   return (
@@ -94,17 +181,16 @@ export default function ProductsSection() {
           <h2 className="text-3xl font-bold tracking-tight text-slate-900">Gestión de Productos</h2>
           <p className="text-slate-500 mt-1">Administra el inventario de tu ferretería.</p>
         </div>
-        <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
-          <DialogTrigger asChild>
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-              <Plus className="mr-2 h-4 w-4" /> Añadir Nuevo Producto
-            </Button>
-          </DialogTrigger>
+        <Button onClick={openAddModal} className="bg-blue-600 hover:bg-blue-700 text-white">
+          <Plus className="mr-2 h-4 w-4" /> Añadir Nuevo Producto
+        </Button>
+
+        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
           <DialogContent className="sm:max-w-[500px]">
             <DialogHeader>
-              <DialogTitle>Añadir Nuevo Producto</DialogTitle>
+              <DialogTitle>{isEditing ? "Editar Producto" : "Añadir Nuevo Producto"}</DialogTitle>
               <DialogDescription>
-                Ingresa los detalles del nuevo producto para el inventario.
+                {isEditing ? "Modifica los detalles del producto." : "Ingresa los detalles del nuevo producto para el inventario."}
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
@@ -115,13 +201,13 @@ export default function ProductsSection() {
                     id="sku"
                     name="sku"
                     placeholder="FER-XXX"
-                    value={newProduct.sku}
+                    value={formData.sku}
                     onChange={handleInputChange}
                   />
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="categoria">Categoría</Label>
-                  <Select onValueChange={handleSelectChange} value={newProduct.categoria}>
+                  <Select onValueChange={handleSelectChange} value={formData.categoria}>
                     <SelectTrigger>
                       <SelectValue placeholder="Seleccionar" />
                     </SelectTrigger>
@@ -132,6 +218,14 @@ export default function ProductsSection() {
                       <SelectItem value="Pinturas">Pinturas</SelectItem>
                       <SelectItem value="Herrajes">Herrajes</SelectItem>
                       <SelectItem value="Electricidad">Electricidad</SelectItem>
+                      <SelectItem value="Gasfitería">Gasfitería</SelectItem>
+                      <SelectItem value="Seguridad">Seguridad</SelectItem>
+                      <SelectItem value="Adhesivos">Adhesivos</SelectItem>
+                      <SelectItem value="Abrasivos">Abrasivos</SelectItem>
+                      <SelectItem value="Medición">Medición</SelectItem>
+                      <SelectItem value="Construcción">Construcción</SelectItem>
+                      <SelectItem value="Iluminación">Iluminación</SelectItem>
+                      <SelectItem value="Herramientas Eléctricas">Herramientas Eléctricas</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -142,7 +236,7 @@ export default function ProductsSection() {
                   id="nombre"
                   name="nombre"
                   placeholder="Ej. Martillo de Acero"
-                  value={newProduct.nombre}
+                  value={formData.nombre}
                   onChange={handleInputChange}
                 />
               </div>
@@ -154,7 +248,7 @@ export default function ProductsSection() {
                     name="stockActual"
                     type="number"
                     placeholder="0"
-                    value={newProduct.stockActual}
+                    value={formData.stockActual}
                     onChange={handleInputChange}
                   />
                 </div>
@@ -165,7 +259,7 @@ export default function ProductsSection() {
                     name="stockMinimo"
                     type="number"
                     placeholder="0"
-                    value={newProduct.stockMinimo}
+                    value={formData.stockMinimo}
                     onChange={handleInputChange}
                   />
                 </div>
@@ -176,18 +270,18 @@ export default function ProductsSection() {
                     name="precio"
                     type="number"
                     placeholder="0.00"
-                    value={newProduct.precio}
+                    value={formData.precio}
                     onChange={handleInputChange}
                   />
                 </div>
               </div>
             </div>
             <DialogFooter>
-              <Button variant="outline" onClick={() => setIsAddModalOpen(false)}>
+              <Button variant="outline" onClick={() => setIsModalOpen(false)}>
                 Cancelar
               </Button>
-              <Button onClick={handleSaveProduct} className="bg-blue-600 hover:bg-blue-700 text-white">
-                Guardar Producto
+              <Button onClick={handleSaveProduct} disabled={isLoading} className="bg-blue-600 hover:bg-blue-700 text-white">
+                {isLoading ? "Guardando..." : (isEditing ? "Actualizar Producto" : "Guardar Producto")}
               </Button>
             </DialogFooter>
           </DialogContent>
@@ -256,7 +350,12 @@ export default function ProductsSection() {
                     </TableCell>
                     <TableCell className="text-center">
                       <div className="flex items-center justify-center gap-2">
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-500 hover:text-blue-600 hover:bg-blue-50">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 text-slate-500 hover:text-blue-600 hover:bg-blue-50"
+                          onClick={() => openEditModal(product)}
+                        >
                           <Edit className="h-4 w-4" />
                           <span className="sr-only">Editar</span>
                         </Button>

@@ -1,10 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Search, Plus } from "lucide-react"
-import movimientosData from "@/src/data/movimientos.json"
-import productosData from "@/src/data/productos.json"
 import { Input } from "@/components/ui/input"
 import {
   Select,
@@ -36,6 +34,12 @@ interface Movement {
   referencia: string
 }
 
+interface Product {
+  id: number
+  sku: string
+  nombre: string
+}
+
 const getTypeBadgeColor = (type: string) => {
   switch (type) {
     case "Entrada":
@@ -50,9 +54,11 @@ const getTypeBadgeColor = (type: string) => {
 }
 
 export default function MovementsSection() {
-  const [movements, setMovements] = useState<Movement[]>(movimientosData)
-  const [filteredMovements, setFilteredMovements] = useState<Movement[]>(movimientosData)
+  const [movements, setMovements] = useState<Movement[]>([])
+  const [products, setProducts] = useState<Product[]>([])
+  const [filteredMovements, setFilteredMovements] = useState<Movement[]>([])
   const [currentPage, setCurrentPage] = useState(1)
+  const [isLoading, setIsLoading] = useState(false)
 
   // Filter states
   const [filterType, setFilterType] = useState("Todos")
@@ -69,7 +75,42 @@ export default function MovementsSection() {
 
   const itemsPerPage = 10
 
-  const handleAplicarFiltros = () => {
+  useEffect(() => {
+    fetchMovements()
+    fetchProducts()
+  }, [])
+
+  useEffect(() => {
+    applyFilters()
+  }, [movements, filterType, searchTerm])
+
+  const fetchMovements = async () => {
+    try {
+      const res = await fetch('/api/movements')
+      if (res.ok) {
+        const data = await res.json()
+        // Sort by date descending if needed, or just reverse to show newest first
+        // Assuming the API returns them in order of creation (append), reversing shows newest first
+        setMovements(data.reverse())
+      }
+    } catch (error) {
+      console.error("Error fetching movements:", error)
+    }
+  }
+
+  const fetchProducts = async () => {
+    try {
+      const res = await fetch('/api/products')
+      if (res.ok) {
+        const data = await res.json()
+        setProducts(data)
+      }
+    } catch (error) {
+      console.error("Error fetching products:", error)
+    }
+  }
+
+  const applyFilters = () => {
     const filtered = movements.filter((m) => {
       const typeMatch = filterType === "Todos" || m.tipo === filterType
       const searchMatch =
@@ -81,13 +122,15 @@ export default function MovementsSection() {
     setCurrentPage(1)
   }
 
-  const handleRegisterMovement = () => {
+  const handleRegisterMovement = async () => {
     if (!newMovement.productoSku || !newMovement.cantidad || !newMovement.referencia) {
       return // Basic validation
     }
 
-    const selectedProduct = productosData.find(p => p.sku === newMovement.productoSku)
+    const selectedProduct = products.find(p => p.sku === newMovement.productoSku)
     if (!selectedProduct) return
+
+    setIsLoading(true)
 
     const now = new Date()
     const formattedDate = now.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })
@@ -98,8 +141,7 @@ export default function MovementsSection() {
       quantity = quantity * -1
     }
 
-    const movementToAdd: Movement = {
-      id: Date.now(), // Simple ID generation
+    const movementData = {
       fechaHora: `${formattedDate} ${formattedTime}`,
       productoSku: selectedProduct.sku,
       productoNombre: selectedProduct.nombre,
@@ -109,17 +151,28 @@ export default function MovementsSection() {
       referencia: newMovement.referencia
     }
 
-    const updatedMovements = [movementToAdd, ...movements]
-    setMovements(updatedMovements)
-    setFilteredMovements([movementToAdd, ...filteredMovements]) // Update filtered view as well to show immediate result
+    try {
+      const res = await fetch('/api/movements', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(movementData)
+      })
 
-    setIsModalOpen(false)
-    setNewMovement({
-      productoSku: "",
-      tipo: "Entrada",
-      cantidad: "",
-      referencia: ""
-    })
+      if (res.ok) {
+        await fetchMovements()
+        setIsModalOpen(false)
+        setNewMovement({
+          productoSku: "",
+          tipo: "Entrada",
+          cantidad: "",
+          referencia: ""
+        })
+      }
+    } catch (error) {
+      console.error("Error registering movement:", error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const totalPages = Math.ceil(filteredMovements.length / itemsPerPage)
@@ -165,7 +218,7 @@ export default function MovementsSection() {
           </div>
           <div className="flex items-end gap-2">
             <Button
-              onClick={handleAplicarFiltros}
+              onClick={applyFilters}
               className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
             >
               Aplicar Filtros
@@ -194,7 +247,7 @@ export default function MovementsSection() {
                         <SelectValue placeholder="Seleccionar producto" />
                       </SelectTrigger>
                       <SelectContent>
-                        {productosData.map((prod) => (
+                        {products.map((prod) => (
                           <SelectItem key={prod.id} value={prod.sku}>
                             {prod.nombre} ({prod.sku})
                           </SelectItem>
@@ -241,8 +294,8 @@ export default function MovementsSection() {
                 </div>
                 <DialogFooter>
                   <Button variant="outline" onClick={() => setIsModalOpen(false)}>Cancelar</Button>
-                  <Button onClick={handleRegisterMovement} className="bg-blue-600 hover:bg-blue-700 text-white">
-                    Guardar
+                  <Button onClick={handleRegisterMovement} disabled={isLoading} className="bg-blue-600 hover:bg-blue-700 text-white">
+                    {isLoading ? "Guardando..." : "Guardar"}
                   </Button>
                 </DialogFooter>
               </DialogContent>

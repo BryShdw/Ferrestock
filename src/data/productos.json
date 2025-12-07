@@ -2,11 +2,11 @@
     {
         "id": 1,
         "sku": "FER-001",
-        "nombre": "Martillo de Acero 16oz",
+        "nombre": "Martillo de Acero 16",
         "categoria": "Herramientas",
         "stockActual": 150,
         "stockMinimo": 50,
-        "precio": 25.00
+        "precio": 25
     },
     {
         "id": 2,
@@ -15,7 +15,7 @@
         "categoria": "Herramientas",
         "stockActual": 45,
         "stockMinimo": 100,
-        "precio": 12.50
+        "precio": 12.5
     },
     {
         "id": 3,
@@ -24,7 +24,7 @@
         "categoria": "Tuberías",
         "stockActual": 320,
         "stockMinimo": 100,
-        "precio": 18.00
+        "precio": 18
     },
     {
         "id": 4,
@@ -33,7 +33,7 @@
         "categoria": "Materiales",
         "stockActual": 85,
         "stockMinimo": 200,
-        "precio": 28.00
+        "precio": 28
     },
     {
         "id": 5,
@@ -42,7 +42,7 @@
         "categoria": "Pinturas",
         "stockActual": 200,
         "stockMinimo": 50,
-        "precio": 45.00
+        "precio": 45
     },
     {
         "id": 6,
@@ -51,7 +51,7 @@
         "categoria": "Eléctricos",
         "stockActual": 800,
         "stockMinimo": 100,
-        "precio": 1.50
+        "precio": 1.5
     },
     {
         "id": 7,
@@ -60,7 +60,7 @@
         "categoria": "Herramientas Eléctricas",
         "stockActual": 12,
         "stockMinimo": 20,
-        "precio": 180.00
+        "precio": 180
     },
     {
         "id": 8,
@@ -69,7 +69,7 @@
         "categoria": "Abrasivos",
         "stockActual": 500,
         "stockMinimo": 150,
-        "precio": 3.50
+        "precio": 3.5
     },
     {
         "id": 9,
@@ -78,7 +78,7 @@
         "categoria": "Herramientas",
         "stockActual": 60,
         "stockMinimo": 30,
-        "precio": 35.00
+        "precio": 35
     },
     {
         "id": 10,
@@ -87,7 +87,7 @@
         "categoria": "Medición",
         "stockActual": 120,
         "stockMinimo": 50,
-        "precio": 15.00
+        "precio": 15
     },
     {
         "id": 11,
@@ -96,7 +96,7 @@
         "categoria": "Pinturas",
         "stockActual": 300,
         "stockMinimo": 100,
-        "precio": 8.50
+        "precio": 8.5
     },
     {
         "id": 12,
@@ -105,7 +105,7 @@
         "categoria": "Pinturas",
         "stockActual": 90,
         "stockMinimo": 50,
-        "precio": 12.00
+        "precio": 12
     },
     {
         "id": 13,
@@ -114,7 +114,7 @@
         "categoria": "Herramientas",
         "stockActual": 75,
         "stockMinimo": 40,
-        "precio": 22.00
+        "precio": 22
     },
     {
         "id": 14,
@@ -123,7 +123,7 @@
         "categoria": "Eléctricos",
         "stockActual": 250,
         "stockMinimo": 80,
-        "precio": 6.50
+        "precio": 6.5
     },
     {
         "id": 15,
@@ -132,7 +132,7 @@
         "categoria": "Eléctricos",
         "stockActual": 230,
         "stockMinimo": 80,
-        "precio": 9.00
+        "precio": 9
     },
     {
         "id": 16,
@@ -141,7 +141,7 @@
         "categoria": "Iluminación",
         "stockActual": 450,
         "stockMinimo": 200,
-        "precio": 5.00
+        "precio": 5
     },
     {
         "id": 17,
@@ -150,7 +150,7 @@
         "categoria": "Eléctricos",
         "stockActual": 600,
         "stockMinimo": 200,
-        "precio": 3.00
+        "precio": 3
     },
     {
         "id": 18,
@@ -159,7 +159,7 @@
         "categoria": "Gasfitería",
         "stockActual": 110,
         "stockMinimo": 60,
-        "precio": 18.00
+        "precio": 18
     },
     {
         "id": 19,
@@ -168,7 +168,7 @@
         "categoria": "Gasfitería",
         "stockActual": 800,
         "stockMinimo": 300,
-        "precio": 1.50
+        "precio": 1.5
     },
     {
         "id": 20,
@@ -177,7 +177,7 @@
         "categoria": "Gasfitería",
         "stockActual": 25,
         "stockMinimo": 30,
-        "precio": 65.00
+        "precio": 65
     },
     {
         "id": 21,
@@ -186,7 +186,7 @@
         "categoria": "Seguridad",
         "stockActual": 140,
         "stockMinimo": 50,
-        "precio": 28.00
+        "precio": 28
     },
     {
         "id": 22,
@@ -195,7 +195,7 @@
         "categoria": "Seguridad",
         "stockActual": 90,
         "stockMinimo": 100,
-        "precio": 15.00
+        "precio": 15
     },
     {
         "id": 23,
@@ -204,7 +204,7 @@
         "categoria": "Seguridad",
         "stockActual": 40,
         "stockMinimo": 60,
-        "precio": 22.00
+        "precio": 22
     },
     {
         "id": 24,
@@ -213,7 +213,7 @@
         "categoria": "Adhesivos",
         "stockActual": 180,
         "stockMinimo": 80,
-        "precio": 14.00
+        "precio": 14
     },
     {
         "id": 25,
@@ -222,7 +222,7 @@
         "categoria": "Herramientas",
         "stockActual": 35,
         "stockMinimo": 20,
-        "precio": 32.00
+        "precio": 32
     },
     {
         "id": 26,
@@ -231,7 +231,7 @@
         "categoria": "Abrasivos",
         "stockActual": 900,
         "stockMinimo": 300,
-        "precio": 1.20
+        "precio": 1.2
     },
     {
         "id": 27,
@@ -240,7 +240,7 @@
         "categoria": "Medición",
         "stockActual": 45,
         "stockMinimo": 25,
-        "precio": 18.00
+        "precio": 18
     },
     {
         "id": 28,
@@ -249,7 +249,7 @@
         "categoria": "Herrajes",
         "stockActual": 250,
         "stockMinimo": 100,
-        "precio": 6.00
+        "precio": 6
     },
     {
         "id": 29,
@@ -258,7 +258,7 @@
         "categoria": "Construcción",
         "stockActual": 8,
         "stockMinimo": 15,
-        "precio": 150.00
+        "precio": 150
     },
     {
         "id": 30,
@@ -267,6 +267,6 @@
         "categoria": "Herrajes",
         "stockActual": 400,
         "stockMinimo": 150,
-        "precio": 5.00
+        "precio": 5
     }
 ]
